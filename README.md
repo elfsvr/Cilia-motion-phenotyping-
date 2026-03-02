@@ -17,14 +17,37 @@ This repository presents a fully automated pipeline for high-speed video microsc
 
 ---
 
-## Data Availability
+## Dataset Information
 
-All analysis code and representative HSVM example videos are publicly available at https://github.com/elfsvr/Cilia-motion-phenotyping-.
-The full clinical HSVM dataset is archived at Marmara University and cannot be publicly released due to patient privacy and ethical restrictions.
+High-speed video microscopy recordings (HSVM) used in this study originate from two sources:
+
+1. **Retrospectively archived clinical HSVM recordings (Marmara University Pediatric Pulmonology Department).**  
+   These data were collected under institutional approval and were fully anonymized prior to analysis. Due to patient privacy and ethical restrictions, the full clinical dataset cannot be publicly released. Multiple recordings from the same individual were grouped using unique subject identifiers to prevent sample inflation.
+
+2. **Publicly available HSVM recordings**, obtained from previously published and accessible sources, including:
+
+   - Lavie & Amirav (2019), American Journal of Respiratory and Critical Care Medicine,  
+     doi:10.1164/rccm.201904-0773LE  
+
+   - Bottier et al. (2017), PLoS Computational Biology,  
+     doi:10.1371/journal.pcbi.1005605  
+
+   - Sampaio et al. (2021), ERJ Open Research,  
+     doi:10.1183/23120541.00792-2020  
+
+   - Jackson and Bottier (2022), European Respiratory Journal,  
+     doi:10.1183/13993003.02300-2021  
+
+   - University of Münster HSVM repository (Department of Pediatric Pulmonology),  
+     https://www.medizin.uni-muenster.de/en/pcd/research/high-speed-video-microscopy-analysis-hvma.html  
+
+Representative example videos are provided in this repository for demonstration purposes.
 ---
 
 
-## Requirements
+## Usage Instructions
+
+### 1. Install dependencies
 
 Python >= 3.9
 
@@ -41,7 +64,8 @@ pip install numpy pandas scipy scikit-learn imbalanced-learn matplotlib seaborn 
 ## Contact
 For questions, please contact the first author.
 
-##Code structure
+##Code Information
+
 Yolov8segmentation.py Automated cilia segmentation from HSVM videos. Frames are automatically extracted before segmentation. tvl1_optical_flow.py Dense optical flow computation restricted to segmented cilia regions. feature_bank.py Construction of a reproducible feature bank including motion magnitude statistics, angular features, motion-mask overlap (MMO), wave-based descriptors, and ciliary beat frequency (CBF). classification.py Random Forest-based hierarchical and multi-class classification of motion phenotypes. main.py End-to-end execution of the complete pipeline.
 ## Automated segmentation (YOLOv8)
 
@@ -75,7 +99,7 @@ python classification.py \
   --feature_csv outputs/features/feature_bank.csv \
   --out_dir outputs/figures
 
-## MAIN
+##Full pipeline execution
 python main.py \
   --videos data/videos \
   --out_root outputs
@@ -88,7 +112,14 @@ python main.py \
 - Class imbalance is handled using resampling strategies applied to the training data only.
 -  Balanced accuracy is used as the primary metric for model selection due to class imbalance.
 
+Requirements
+
+pip install numpy pandas scipy scikit-learn imbalanced-learn \ matplotlib seaborn shap opencv-contrib-python ultralytics
  ## License
 This project is released under the MIT License. 
 
+Citations
 
+If you use this repository, please cite:
+
+Sever E. Automated hierarchical classification of ciliary motion phenotypes using optical flow and machine-learning for primary ciliary dyskinesia. PeerJ Computer Science (under review).

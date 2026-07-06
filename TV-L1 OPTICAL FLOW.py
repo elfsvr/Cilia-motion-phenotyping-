@@ -1,5 +1,5 @@
 # TV-L1 OPTICAL FLOW
-# Google Colab Compatible - TAMAMEN EKSİKSİZ KOD
+# Google Colab Compatible 
 
 import os
 import json
